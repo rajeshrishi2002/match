@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
+    <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 </head>
 <body>
@@ -70,6 +70,8 @@ body, #container {
 
 </style>
 <script>
+	  const audio=new Audio();
+	  audio.src="match.mp3";
     var cw, ch, ratio = 0.546875,
     game = document.getElementById('game'),
 		btnArea = document.getElementById('btnArea'),
@@ -90,12 +92,14 @@ body, #container {
 for (var i=1; i<=16; i++){ 
 		var b;
 		if (i==1) b = document.getElementById('b1');
+		
 		else {
 			b = document.getElementById('b1').cloneNode(true);
 			b.id = 'b'+(i);
 			btnArea.appendChild(b);
 		}
 		b.onclick = b.ontouchend = btnClick;
+		audio.play();
 }
 
 
@@ -116,6 +120,7 @@ new TimelineMax({onStart:populate})
 hintBtn.onclick = hintBtn.ontouchend = function(e){
 		if (e.type=='touchend') hintBtn.onclick = undefined;
 		TweenMax.set(hintBtn, {textContent:hint, fontSize:35})
+		audio.play();
 }
 
 
@@ -151,7 +156,7 @@ function btnClick(e){
 			timeLeft = timeLimit;
 			timeInt = setInterval(updateTime, 10);
     }
-
+	audio.play();
 		var b = e.currentTarget;
 		TweenMax.to(b, 0.05, {scale:0.95, yoyo:true, repeat:1});
 		
